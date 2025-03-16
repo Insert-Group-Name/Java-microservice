@@ -1,0 +1,6 @@
+# Local environment specific settings with sensitive information
+# COPY THIS FILE to application-local.properties and update with your actual values
+# DO NOT commit application-local.properties to Git
+
+# Claude API Key (replace with your actual key)
+ANTHROPIC_API_KEY=your_api_key_here 
