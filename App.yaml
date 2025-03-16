@@ -1,12 +1,19 @@
 runtime: java21  # Use java11 or java8 if needed
 instance_class: F1  # Choose instance size (F1, F2, B1, etc.)
+
+# Environment variables
 env_variables:
-  SPRING_PROFILES_ACTIVE: dev  # Example for Spring Boot apps
+  SPRING_PROFILES_ACTIVE: prod
+  # Don't put the actual API key here - it's injected from GitHub secrets
+
 handlers:
   - url: /.*
     script: auto
+
 automatic_scaling:
   min_instances: 1
   max_instances: 5
   target_cpu_utilization: 0.65
-entrypoint: java -jar target/Intellibus-0.0.1-SNAPSHOT.jar
+
+# Use the correct JAR file name
+entrypoint: java -jar target/Intellibus-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
