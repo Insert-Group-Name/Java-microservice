@@ -1,6 +1,6 @@
 # Intellibus - AI-Powered Sentiment Analysis and Chat Insights
 
-This Spring Boot microservice uses Claude AI to provide sentiment analysis for text and insights from chat conversations.
+This Spring Boot microservice uses Claude AI to provide sentiment analysis for text, insights from chat conversations, and generates various types of reports.
 
 ## Features
 
@@ -24,6 +24,13 @@ Get deep insights from chat conversations:
 - Issues or problems detected
 - Action items that could be followed up on
 - Message-by-message sentiment and analysis
+
+### 3. Report Generation
+Generate comprehensive reports with AI-driven insights:
+
+- **Engagement Metrics Reports**: Analyze user engagement metrics
+- **Post-Event Reports**: Summarize event outcomes and feedback
+- **Daily Monitoring Reports**: Track key metrics throughout the day
 
 ## API Endpoints
 
@@ -87,6 +94,113 @@ Request body:
   "context": "customer_support",
   "userId": "user_123"
 }
+```
+
+### Report Generation
+
+#### Generate Engagement Metrics Report
+```
+POST /api/reports/engagement-metrics
+```
+Request body:
+```json
+{
+  "title": "Q2 2023 User Engagement Report",
+  "startDate": "2023-04-01",
+  "endDate": "2023-06-30",
+  "metricsToInclude": ["active_users", "session_duration", "retention_rate"],
+  "breakdownCategories": {
+    "demographics": ["age", "location", "device_type"],
+    "behavior": ["new_users", "returning_users"]
+  },
+  "audience": "Mobile App Users",
+  "channels": ["mobile_app", "web", "email"],
+  "includeSentimentAnalysis": true,
+  "context": "Analyzing user engagement after recent app update"
+}
+```
+
+#### Generate Post-Event Report
+```
+POST /api/reports/post-event
+```
+Request body:
+```json
+{
+  "title": "Tech Conference 2023 Report",
+  "eventType": "conference",
+  "location": "New York Tech Center",
+  "eventDateTime": "2023-09-15T09:00:00Z",
+  "participantCount": 250,
+  "sponsors": ["TechCorp", "DevInc", "CloudSystems"],
+  "activities": [
+    "Keynote: Future of AI",
+    "Workshop: Cloud Deployment Strategies",
+    "Panel Discussion: Cybersecurity Trends"
+  ],
+  "participantFeedback": [
+    "Great keynote speaker, very insightful!",
+    "The workshops were hands-on and practical.",
+    "Would have liked more networking opportunities."
+  ],
+  "kpis": {
+    "attendance_rate": 92,
+    "satisfaction_score": 4.2,
+    "speaker_ratings": 4.5
+  },
+  "includeRecommendations": true,
+  "context": "First in-person event after pandemic"
+}
+```
+
+#### Generate Daily Monitoring Report
+```
+POST /api/reports/daily-monitoring
+```
+Request body:
+```json
+{
+  "title": "System Performance - Daily Report",
+  "startDate": "2023-10-15",
+  "metricsToTrack": ["response_time", "error_rate", "user_signups", "active_sessions"],
+  "currentMetrics": {
+    "response_time": 235,
+    "error_rate": 0.5,
+    "user_signups": 127,
+    "active_sessions": 4568
+  },
+  "previousPeriodMetrics": {
+    "response_time": 250,
+    "error_rate": 0.7,
+    "user_signups": 115,
+    "active_sessions": 4320
+  },
+  "targetMetrics": {
+    "response_time": 200,
+    "error_rate": 0.3,
+    "user_signups": 150,
+    "active_sessions": 5000
+  },
+  "notableEvents": [
+    "Deployed new search feature at 10:00 AM",
+    "Marketing campaign launched at 2:30 PM"
+  ],
+  "timeInterval": "hourly",
+  "highlightTrends": true,
+  "includeAlerts": true,
+  "alertThresholds": {
+    "response_time": 300,
+    "error_rate": 1.0
+  }
+}
+```
+
+#### Asynchronous Report Generation
+All report endpoints also support asynchronous processing by appending `/async` to the endpoint:
+```
+POST /api/reports/engagement-metrics/async
+POST /api/reports/post-event/async
+POST /api/reports/daily-monitoring/async
 ```
 
 ## Configuration
