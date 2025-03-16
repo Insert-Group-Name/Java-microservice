@@ -203,6 +203,85 @@ POST /api/reports/post-event/async
 POST /api/reports/daily-monitoring/async
 ```
 
+### Health Check Endpoints
+
+#### Main Health Check
+```
+GET /health
+```
+Response:
+```json
+{
+  "status": "UP",
+  "timestamp": "2023-11-21T14:30:45.123",
+  "services": [
+    {"service": "ClaudeAIService", "status": "UP"},
+    {"service": "SentimentAnalysisService", "status": "UP"},
+    {"service": "ChatAnalysisService", "status": "UP"},
+    {"service": "ReportGenerationService", "status": "UP"}
+  ],
+  "message": "All services are operational"
+}
+```
+
+#### Detailed Health Check
+```
+GET /health/details
+```
+Response:
+```json
+{
+  "status": "UP",
+  "timestamp": "2023-11-21T14:30:45.123",
+  "components": {
+    "claudeAI": {
+      "status": "UP",
+      "details": {
+        "requestCount": 152,
+        "service": "Claude AI"
+      }
+    },
+    "sentimentAnalysis": {
+      "status": "UP",
+      "details": {
+        "service": "Sentiment Analysis"
+      }
+    },
+    "chatAnalysis": {
+      "status": "UP",
+      "details": {
+        "service": "Chat Analysis"
+      }
+    },
+    "reportGeneration": {
+      "status": "UP",
+      "details": {
+        "service": "Report Generation"
+      }
+    }
+  },
+  "message": "All services are operational"
+}
+```
+
+#### Individual Service Health Checks
+Each service also has its own health check endpoint:
+```
+GET /api/chat/health
+GET /api/sentiment/health
+GET /api/chat-analysis/health
+GET /api/reports/health
+```
+Response:
+```json
+{
+  "status": "UP",
+  "controller": "SentimentAnalysisController",
+  "timestamp": "2023-11-21T14:30:45.123",
+  "message": "SentimentAnalysisController is operational"
+}
+```
+
 ## Configuration
 
 The application uses Claude AI via the Anthropic API. Configuration is managed through environment variables:

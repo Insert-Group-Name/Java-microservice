@@ -1,11 +1,14 @@
 package com.example.Intellibus.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Intellibus.models.HealthResponse;
 import com.example.Intellibus.models.sentiment.SentimentAnalysisRequest;
 import com.example.Intellibus.models.sentiment.SentimentAnalysisResult;
 import com.example.Intellibus.services.SentimentAnalysisService;
@@ -24,6 +27,15 @@ public class SentimentAnalysisController {
 
     @Autowired
     private SentimentAnalysisService sentimentService;
+
+    /**
+     * Health check endpoint
+     */
+    @GetMapping("/health")
+    public ResponseEntity<HealthResponse> healthCheck() {
+        log.info("Health check request received for SentimentAnalysisController");
+        return ResponseEntity.ok(new HealthResponse("SentimentAnalysisController"));
+    }
 
     /**
      * Analyze sentiment of a single text

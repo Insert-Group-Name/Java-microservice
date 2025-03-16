@@ -1,11 +1,14 @@
 package com.example.Intellibus.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Intellibus.models.HealthResponse;
 import com.example.Intellibus.models.chat.ChatAnalysisRequest;
 import com.example.Intellibus.models.chat.ChatAnalysisResult;
 import com.example.Intellibus.services.ChatAnalysisService;
@@ -24,6 +27,15 @@ public class ChatAnalysisController {
 
     @Autowired
     private ChatAnalysisService chatAnalysisService;
+
+    /**
+     * Health check endpoint
+     */
+    @GetMapping("/health")
+    public ResponseEntity<HealthResponse> healthCheck() {
+        log.info("Health check request received for ChatAnalysisController");
+        return ResponseEntity.ok(new HealthResponse("ChatAnalysisController"));
+    }
 
     /**
      * Analyze a chat conversation
