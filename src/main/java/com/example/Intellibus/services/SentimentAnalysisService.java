@@ -1,13 +1,10 @@
 package com.example.Intellibus.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.Intellibus.models.sentiment.SentimentAnalysisRequest;
 import com.example.Intellibus.models.sentiment.SentimentAnalysisResult;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,16 +18,6 @@ public class SentimentAnalysisService {
     
     @Autowired
     private ObjectMapper objectMapper;
-    
-    private static final String SENTIMENT_SYSTEM_PROMPT = 
-            "You are a sentiment analysis expert. Your task is to analyze text and provide detailed sentiment insights. " +
-            "Always structure your response as a valid JSON object with the following fields:\n" +
-            "- sentiment: overall sentiment (POSITIVE, NEGATIVE, NEUTRAL, or MIXED)\n" +
-            "- score: a decimal score from -1.0 (extremely negative) to 1.0 (extremely positive)\n" +
-            "- confidence: a decimal between 0.0 and 1.0 indicating your confidence in this assessment\n" +
-            "- dominant_emotions: an array of the most prevalent emotions detected (e.g. joy, anger, etc.)\n" +
-            "- key_phrases: an array of notable phrases that influenced your assessment\n" +
-            "- insights: a brief textual analysis explaining your reasoning";
 
     /**
      * Analyzes the sentiment of the provided text.

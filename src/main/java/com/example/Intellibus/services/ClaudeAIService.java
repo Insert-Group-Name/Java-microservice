@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +37,6 @@ public class ClaudeAIService {
     @Autowired
     private RestTemplate restTemplate;
     
-    @Autowired
-    private ObjectMapper objectMapper;
     
     private static final String API_VERSION = "2023-06-01";
     private static final String SYSTEM_PROMPT = 
