@@ -1,0 +1,36 @@
+name: Deploy to Google App Engine
+
+on:
+    push:
+      branches:
+        - main
+      paths:
+        - 'src/**'
+    # Deploy when merging into the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'  # Change to match your Java version
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Build the Application
+        run: mvn clean package
+
+      - name: Deploy to App Engine
+        run: gcloud app deploy --quiet
