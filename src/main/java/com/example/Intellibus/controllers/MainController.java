@@ -18,15 +18,12 @@ public class MainController {
 
     @PostMapping("path")
     public String postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
         System.out.println(entity);
         return "Hello, " +entity;
     }
     
     @PutMapping("path/{id}")
     public String putMethodName(@PathVariable String id, @RequestBody String entity) {
-        //TODO: process PUT request
-        
         return "you entered: "+entity;
     }
 }

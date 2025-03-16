@@ -34,10 +34,6 @@ public class ChatAnalysisService {
     @Autowired
     private ObjectMapper objectMapper;
     
-    private static final String CHAT_ANALYSIS_SYSTEM_PROMPT = 
-            "You are a conversation analysis expert. Your task is to analyze chat conversations and provide detailed insights. " +
-            "Always structure your response as a valid JSON object with fields for topics, intents, key questions, issues, " +
-            "action items, and a summary. Focus on the most important insights from the conversation.";
 
     /**
      * Analyzes a chat conversation to provide insights
